@@ -13,7 +13,7 @@ jobs:
       - uses: ./test.yaml@v1
   build:
     runs-on: ubuntu-latest
-    dependsOn: test
+    needs: test
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20
