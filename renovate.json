@@ -1,0 +1,18 @@
+{
+  "pin": "*",
+  "onboarding": {
+    "createPullRequest": true
+  },
+  "repositories": [
+    "github:sp1222/language-day-by-day"
+  ],
+  "packageRules": [
+    {
+      "updateTypes": [
+        "minor"
+      ],
+      "automerge": true,
+      "separateMinorPatch": true
+    }
+  ]
+}
