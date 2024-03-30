@@ -1,18 +1,23 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "onboarding": {
-    "createPullRequest": true
-  },
   "repositories": [
     "github:sp1222/language-day-by-day"
   ],
   "packageRules": [
     {
       "updateTypes": [
-        "minor"
+        "minor",
+        "patch",
+        "pin",
+        "digest"
       ],
       "automerge": true,
       "separateMinorPatch": true
     }
-  ]
+  ],
+  "autoApprove": true,
+  "osvVulnerabilityAlerts": true,
+  "vulnerabilityAlerts": {
+    "enabled": true
+  }
 }
