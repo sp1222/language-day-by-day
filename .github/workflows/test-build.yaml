@@ -14,6 +14,7 @@ jobs:
         with:
           node-version: 20
       - name: Install dependencies
+        run: npm ci
         run: npm install --save-dev jest
       - name: Lint check
         run: eslint --fix-dry-run .
