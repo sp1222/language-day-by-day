@@ -6,12 +6,16 @@
   "packageRules": [
     {
       "updateTypes": [
-        "minor"
+        "minor",
+        "patch",
+        "pin",
+        "digest"
       ],
       "automerge": true,
       "separateMinorPatch": true
     }
   ],
+  "autoApprove": true,
   "osvVulnerabilityAlerts": true,
   "vulnerabilityAlerts": {
     "enabled": true
