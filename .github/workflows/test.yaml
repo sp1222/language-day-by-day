@@ -1,21 +1,19 @@
 name: Run Tests
 
-on: 
-  push:
-    branch: [ "**" ]
-
-jobs:
-  test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Use Node.js 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-      - name: Install dependencies
-        run: npm ci
-      - name: Install test dependencies
-        run: npm install --save-dev jest
-      - name: Run Next.js tests
-        run: npm test
+test:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 20
+    uses: actions/setup-node@v4
+    with:
+        node-version: 20
+    - name: Install dependencies
+    run: npm ci
+    if: github.event_name == "push"
+    - name: Install test dependencies
+    run: npm install --save-dev jest
+    if: github.event_name == "push"
+    - name: Run Next.js tests
+    run: npm test
+    if: github.event_name == "push"
