@@ -1,8 +1,9 @@
-name: Test and Build on PR/MR
+name: Build
 
 on: 
   push:
     branch: [ "**" ]
+  workflow_dispatch:
 
 jobs:
   build:
