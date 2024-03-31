@@ -1,18 +1,17 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "repositories": [
-    "github:sp1222/language-day-by-day"
+  "extends": [
+    "mergeConfidence:all-badges"
   ],
   "packageRules": [
     {
-      "updateTypes": [
+      "matchUpdateTypes": [
         "minor",
         "patch",
         "pin",
         "digest"
       ],
-      "automerge": true,
-      "separateMinorPatch": true
+      "automerge": true
     }
   ],
   "autoApprove": true,
