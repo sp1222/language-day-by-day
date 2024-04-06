@@ -1,4 +1,4 @@
-export default () => {
+const Main = () => {
   const greeting = "Καλημέρα";
   const name = "Shelby";
   return (
@@ -7,3 +7,5 @@ export default () => {
     </h1>
   );
 }
+
+export default Main;
