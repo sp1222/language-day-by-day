@@ -1,0 +1,22 @@
+name: Renovate
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  renovate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm install
+      - name: Configure renovate
+        env:
+          RENOVATE_CONFIG_FILE: renovate.json
+          GITHUB_TOKEN: ${{secrets.RENOVATE_TOKEN}}
+        uses: renovatebot/github-action@v4
