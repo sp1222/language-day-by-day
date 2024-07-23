@@ -1,0 +1,15 @@
+{
+    "editor.tabSize": 2,
+    "editor.detectIndentation": true,
+    "editor.codeActionsOnSave": {
+        "source.addMissingImports": "explicit",
+        "files.insertFinalNewLine": "explicit",
+        "source.insertFinalNewLine": "explicit",
+        "source.fixAll": "explicit",
+        "source.fixAll.eslint": "explicit",
+        "source.organizeImports": "explicit",
+    },
+    "editor.formatOnSave": true,
+    "javascript.format.enable": true,
+    "files.autoSave": "afterDelay",
+}
