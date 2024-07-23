@@ -6,6 +6,6 @@ const Main = () => {
       {greeting}, {name}!
     </h1>
   );
-}
+};
 
 export default Main;
