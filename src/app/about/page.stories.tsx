@@ -10,4 +10,3 @@ export default {
 const Template = (args: any) => <About {...args} />;
 
 export const Default = Template.bind({});
-const args = {};
