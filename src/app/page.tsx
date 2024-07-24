@@ -1,9 +1,11 @@
-"use-client";
+"use client";
+
+import { Header } from "@/components/header/header";
 
 export default function Home() {
   return (
-    <main>
-      <h1 className="text-3xl font-bold text-center">Language Day-by-Day</h1>
-    </main>
+    <div className="flex justify-center">
+        <Header text="Language Day-by-Day"/>
+    </div>
   );
 }
