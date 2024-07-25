@@ -1,4 +1,6 @@
 import type { Meta, StoryObj} from "@storybook/react";
+import { within, expect } from '@storybook/test';
+
 
 import {Header} from "@/components/header/header";
 
@@ -10,7 +12,9 @@ export default meta;
 type Story = StoryObj<typeof Header>;
 
 export const Primary: Story = {
-  args: {
-    text: "Language Day-by-Day",
-  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const headerText = canvas.getByText(/Language Day-by-Day/);
+    await expect(headerText).toBeInTheDocument();
+  }
 };
