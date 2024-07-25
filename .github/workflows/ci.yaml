@@ -5,34 +5,34 @@ on:
     branch: [ "**" ]
 
 jobs:
-  # lint:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Use Node.js 20
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #     - name: Install dependencies
-  #       run: npm ci
-  #     - name: Lint check
-  #       run: npm run lint --fix-dry-run .
-  # test-jest:
-  #   runs-on: ubuntu-latest
-  #   needs: lint
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Use Node.js 20
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #     - name: Install jest dependencies
-  #       run: npm install --save-dev jest
-  #     - name: Run Next.js tests
-  #       run: npm run test
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Lint check
+        run: npm run lint --fix-dry-run .
+  test-jest:
+    runs-on: ubuntu-latest
+    needs: lint
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install jest dependencies
+        run: npm install --save-dev jest
+      - name: Run Next.js tests
+        run: npm run test
   test-storybook:
     runs-on: ubuntu-latest
-    # needs: test-jest
+    needs: test-jest
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20
@@ -45,12 +45,8 @@ jobs:
         run: npx playwright install --with-deps
       - name: Start Storybook 
         run: npm run storybook -- --ci --port 6006 &
-      # Wait for Storybook to be fully started
-      # The below command waits for Storybook to be available at http://localhost:6006
       - name: Wait for Storybook
         run: npx wait-on http://localhost:6006
-      # - name: Build Storybook
-      #   run: npm run build-storybook
       - name: Run Storybook tests
         run: npm run test:storybook
       - name: Stop Storybook
