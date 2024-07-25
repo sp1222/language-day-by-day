@@ -13,6 +13,7 @@
     "test:coverage": "jest --coverage",
     "test:storybook": "test-storybook",
     "storybook": "storybook dev -p 6006",
+    "storybook:ci": "storybook -- --ci --port 6006 &",
     "build-storybook": "storybook build"
   },
   "devDependencies": {
