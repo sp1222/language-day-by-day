@@ -11,6 +11,7 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
+    "test:storybook": "test-storybook",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -24,6 +25,7 @@
     "@storybook/nextjs": "^8.2.5",
     "@storybook/react": "^8.2.5",
     "@storybook/test": "^8.2.5",
+    "@storybook/test-runner": "^0.19.1",
     "@testing-library/react": "^16.0.0",
     "@types/jest": "^29.5.12",
     "@types/node": "^20.14.11",
