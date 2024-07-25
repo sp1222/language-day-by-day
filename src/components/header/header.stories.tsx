@@ -1,11 +1,10 @@
-import type { Meta, StoryObj} from "@storybook/react";
-import { within, expect } from '@storybook/test';
+import type { Meta, StoryObj } from "@storybook/react";
+import { within, expect } from "@storybook/test";
 
-
-import {Header} from "@/components/header/header";
+import { Header } from "@/components/header/header";
 
 const meta: Meta<typeof Header> = {
-  component: Header
+  component: Header,
 };
 
 export default meta;
@@ -16,5 +15,5 @@ export const Primary: Story = {
     const canvas = within(canvasElement);
     const headerText = canvas.getByText(/Language Day-by-Day/);
     await expect(headerText).toBeInTheDocument();
-  }
+  },
 };

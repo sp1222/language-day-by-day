@@ -1,8 +1,5 @@
 "use client";
 
 export default function Home() {
-  return (
-    <div className="flex justify-center">
-    </div>
-  );
+  return <div className="flex justify-center"></div>;
 }
