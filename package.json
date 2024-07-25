@@ -11,9 +11,8 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
-    "test:storybook": "test-storybook",
+    "test:storybook": "test-storybook --headless",
     "storybook": "storybook dev -p 6006",
-    "storybook:ci": "storybook -- --ci --port 6006 &",
     "build-storybook": "storybook build"
   },
   "devDependencies": {
