@@ -35,4 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# storybook and playwright
 *storybook.log
+__test__/visual/screenshots/*
+test-results/*
