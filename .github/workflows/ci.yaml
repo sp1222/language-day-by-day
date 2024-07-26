@@ -41,8 +41,6 @@ jobs:
           node-version: 20
       - name: Install storybook dependencies
         run: npm install
-      - name: Install Playwright
-        run: npx playwright install --with-deps
       - name: Start Storybook 
         run: npm run storybook -- --ci --port 6006 &
       - name: Wait for Storybook
