@@ -1,5 +1,7 @@
 "use client";
 
-export default function Home() {
+const Home = () => {
   return <div className="flex justify-center"></div>;
 }
+
+export default Home;
