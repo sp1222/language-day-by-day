@@ -1,9 +1,9 @@
-"use-client";
+"use client";
 
 const About = () => {
   return (
     <>
-      <h1 className="text-3xl font-bold text-center">About page</h1>
+      <h2 className="text-3xl font-bold text-center">About page</h2>
     </>
   );
 };
