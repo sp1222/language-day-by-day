@@ -26,7 +26,7 @@ jobs:
         with:
           node-version: 20
       - name: Install jest dependencies
-        run: npm install --save-dev jest
+        run: npm ci
       - name: Run Next.js tests
         run: npm run test
   test-storybook:
@@ -38,7 +38,7 @@ jobs:
         with:
           node-version: 20
       - name: Install storybook dependencies
-        run: npm install
+        run: npm ci
       - name: Install Playwright
         run: npx playwright install --with-deps
       - name: Start Storybook 
