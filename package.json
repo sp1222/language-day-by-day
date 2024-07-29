@@ -15,7 +15,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "storybook:headless": "storybook dev -p 6006 --ci",
-    "test:visual": "npm run storybook:headless && wait-on http://localhost:6006 && npx playwright test"
+    "test:visual": "concurrently \"npm run storybook:headless\" \"wait-on http://localhost:6006 && npx playwright test\""
   },
   "devDependencies": {
     "@chromatic-com/storybook": "^1.6.1",
