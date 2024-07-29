@@ -4,7 +4,7 @@ import { resolve } from 'path';
 
 test('Header visual regression test', async ({ page }) => {
   await page.goto('/iframe.html?viewMode=story&id=components-header--primary');
-  await page.waitForTimeout(1500);
+  await page.waitForTimeout(1000);
 
   const baselinePath = resolve(__dirname, 'screenshots/baseline.png');
   const currentPath = resolve(__dirname, 'screenshots/current.png');

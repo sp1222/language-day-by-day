@@ -11,7 +11,7 @@ const pixelmatchPromise = import('pixelmatch');
  * @param threshold      the acceptable threshold to allow for a difference image
  * @returns 
  */
-export const compareImages = async (baselinePath: string, currentPath: string, diffPath: string, threshold: number = 0.12) => {
+export const compareImages = async (baselinePath: string, currentPath: string, diffPath: string, threshold: number = 0.10) => {
   const { default: pixelmatch } = await pixelmatchPromise;
   const img1 = PNG.sync.read(readFileSync(baselinePath));
   const img2 = PNG.sync.read(readFileSync(currentPath));
