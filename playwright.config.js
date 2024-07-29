@@ -1,11 +1,9 @@
-const { defineConfig, devices } = require('@playwright/test');
+import { defineConfig, devices } from '@playwright/test';
 
-module.exports = defineConfig({
+export default defineConfig({
   testDir: './__test__/visual',
   use: {
-    // Configure the base URL
     baseURL: 'http://localhost:6006',
-    // Configure browser options
     browserName: 'chromium',
     headless: true,
   },
