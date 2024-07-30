@@ -65,17 +65,17 @@ jobs:
         run: npx wait-on http://localhost:6006
       - name: Run Playwright test
         run: npx playwright test
-      # - uses: actions/upload-artifact@v4
-      #   with:
-      #     path: __test__/visual/**/screenshots/
-      #     name: images
-      # - name: Commit and push changes
-      #   run: |
-      #     git config --global user.name "github-actions[bot]"
-      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      #     git add __test__/visual/**/screenshots/
-      #     git commit -m "Add Playwright test artifacts"
-      #     git push
+      - uses: actions/upload-artifact@v4
+        with:
+          path: __test__/visual/**/screenshots/
+          name: images
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add __test__/visual/**/screenshots/
+          git commit -m "Add Playwright test artifacts"
+          git push
   build:
     runs-on: ubuntu-latest
     needs: [lint, test-jest, test-storybook, test-visual]
