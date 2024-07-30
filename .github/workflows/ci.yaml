@@ -47,8 +47,6 @@ jobs:
         run: npx wait-on http://localhost:6006
       - name: Run Storybook tests
         run: npm run test:storybook
-      - name: Stop Storybook
-        run: kill $(lsof -t -i:6006)
 # TODO: consider cleaning up images to reduce space consumption, keep baseline, only keep current and diff if the test fails
   test-visual:
     runs-on: ubuntu-latest
@@ -62,10 +60,12 @@ jobs:
         run: npm ci
       - name: Install Playwright
         run: npx playwright install --with-deps
-      - name: Run visual regression test
-        run: npm run test:visual
-      # - name: Stop Storybook
-      #   run: kill $(lsof -t -i:6006)
+      - name: Start Storybook 
+        run: npm run storybook -- --ci --port 6006 &
+      - name: Wait for Storybook
+        run: npx wait-on http://localhost:6006
+      - name: Run Playwright test
+        run: npx playwright test
   build:
     runs-on: ubuntu-latest
     needs: [lint, test-jest, test-storybook, test-visual]
