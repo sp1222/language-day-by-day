@@ -47,7 +47,6 @@ jobs:
         run: npx wait-on http://localhost:6006
       - name: Run Storybook tests
         run: npm run test:storybook
-# TODO: consider cleaning up images to reduce space consumption, keep baseline, only keep current and diff if the test fails
   test-visual:
     runs-on: ubuntu-latest
     steps:
@@ -71,6 +70,8 @@ jobs:
           path: __test__/visual/**/screenshots/
           name: images
       - name: Commit and push changes
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
