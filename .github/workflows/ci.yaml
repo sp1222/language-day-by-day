@@ -95,7 +95,7 @@ jobs:
       # Handling failure case for feature branches
       # We persist all three images for the branch owner to review
       - name: Handle feature branch failure
-        if: failure() && github.ref != "refs/heads/main"
+        if: failure() && github.ref != 'refs/heads/main'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
@@ -103,7 +103,7 @@ jobs:
           git commit -m "Add Playwright test artifacts [ci skip]"
           git push
       - name: Comment on PR
-        if: failure() && github.ref != "refs/heads/main"
+        if: failure() && github.ref != 'refs/heads/main'
         uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -114,7 +114,7 @@ jobs:
 
       # Handling failure case for the main branch
       - name: Handle main branch failure
-        if: failure() && github.ref == "refs/heads/main"
+        if: failure() && github.ref == 'refs/heads/main'
         run: |
           for file in __test__/visual/images/*-current.png; do
             mv "$file" "${file/-current.png/-baseline.png}"
