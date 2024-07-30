@@ -1,7 +1,7 @@
-import { copyFileSync, existsSync, readFileSync, writeFileSync } from 'fs';
-import { PNG } from 'pngjs';
+import { copyFileSync, existsSync, readFileSync, writeFileSync } from "fs";
+import { PNG } from "pngjs";
 
-const pixelmatchPromise = import('pixelmatch');
+const pixelmatchPromise = import("pixelmatch");
 
 /**
  * 
@@ -29,8 +29,6 @@ export const compareImages = async (baselinePath: string, currentPath: string, d
 export const isRunningRegressionTest = async (baselinePath: string, currentPath: string) => {
 
   if (!existsSync(baselinePath)) {
-    copyFileSync(currentPath, baselinePath);
-    console.log('New baseline screenshot saved.');
     return false;
   }
   return true;
