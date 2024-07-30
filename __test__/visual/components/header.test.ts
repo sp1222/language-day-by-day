@@ -15,4 +15,5 @@ test('Header visual regression test', async ({ page }) => {
     const numDiffPixels = await compareImages(baselinePath, currentPath, diffPath);
     expect(numDiffPixels).toBe(0);
   }
+  await page.close();
 });
