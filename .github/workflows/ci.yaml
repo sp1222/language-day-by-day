@@ -80,6 +80,7 @@ jobs:
         run: npx wait-on http://localhost:6006
       - name: Run visual regression test
         run: |
+          SCREENSHOTS_DIR="$GITHUB_WORKSPACE/__test__/visual/screenshots"
           npx playwright test || echo "Playwright test failed" >> $GITHUB_ENV
 
       # Handling success case for any branch
@@ -87,12 +88,12 @@ jobs:
       - name: Handle success
         if: success()
         run: |
-          for file in __test__/visual/images/*-current.png; do
+          for file in $SCREENSHOTS_DIR/*-current.png; do
             mv "$file" "${file/-current.png/-baseline.png}"
           done
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add __test__/visual/images/*-baseline.png
+          git add $SCREENSHOTS_DIR/*-baseline.png
           git commit -m "Update Playwright baseline images [ci skip]"
           git push
 
@@ -103,7 +104,7 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add __test__/visual/images/*.png
+          git add $SCREENSHOTS_DIR/*.png
           git commit -m "Add Playwright test artifacts [ci skip]"
           git push
       - name: Comment on PR
@@ -120,7 +121,7 @@ jobs:
       - name: Handle main branch failure
         if: failure() && github.ref == 'refs/heads/main'
         run: |
-          for file in __test__/visual/screenshots/*-current.png; do
+          for file in $SCREENSHOTS_DIR/*-current.png; do
             echo $file
             if [ -e "$file" ]; then
               mv "$file" "${file/-current.png/-baseline.png}"
@@ -131,7 +132,7 @@ jobs:
           done
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add __test__/visual/screenshots/*-baseline.png
+          git add $SCREENSHOTS_DIR/*-baseline.png
           git commit -m "Update Playwright baseline screenshots [ci skip]"
           git push
 
