@@ -10,11 +10,6 @@ test("Header visual regression test", async ({ page }) => {
   const currentPath = resolve("__test__/visual/screenshots/header-primary-current.png");
   const diffPath = resolve("__test__/visual/screenshots/header-primary-diff.png");
 
-  console.log('PATHS')
-  console.log(currentPath);
-  console.log(baselinePath);
-  console.log(diffPath);
-
   await page.screenshot({ path: currentPath });
   if (await isRunningRegressionTest(baselinePath, currentPath)) {
     const numDiffPixels = await compareImages(baselinePath, currentPath, diffPath);

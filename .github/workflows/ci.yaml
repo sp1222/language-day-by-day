@@ -138,40 +138,6 @@ jobs:
           git commit -m "Update Playwright baseline screenshots [ci skip]"
           git push
 
-
-  # this works, but needs to be rewritten to account for different workflow results
-  # test-visual:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: actions/checkout@v4
-  #     - name: Use Node.js 20
-  #       uses: actions/setup-node@v4
-  #       with:
-  #         node-version: 20
-  #     - name: Install dependencies
-  #       run: npm ci
-  #     - name: Install Playwright
-  #       run: npx playwright install --with-deps
-  #     - name: Start Storybook 
-  #       run: npm run storybook -- --ci --port 6006 &
-  #     - name: Wait for Storybook
-  #       run: npx wait-on http://localhost:6006
-  #     - name: Run Playwright test
-  #       run: npx playwright test
-
-
-      # This works to save images to the branch
-      # - uses: actions/upload-artifact@v4
-      #   with:
-      #     path: __test__/visual/**/screenshots/
-      #     name: images
-      # - name: Commit and push changes
-      #   run: |
-      #     git config --global user.name "github-actions[bot]"
-      #     git config --global user.email "github-actions[bot]@users.noreply.github.com"
-      #     git add __test__/visual/**/screenshots/
-      #     git commit -m "Add Playwright test artifacts"
-      #     git push
   build:
     runs-on: ubuntu-latest
     needs: [lint, test-jest, test-storybook, test-visual]
