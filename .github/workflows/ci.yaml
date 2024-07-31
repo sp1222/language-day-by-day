@@ -81,6 +81,7 @@ jobs:
       - name: Run visual regression test
         run: |
           SCREENSHOTS_DIR="$GITHUB_WORKSPACE/__test__/visual/screenshots"
+          echo $SCREENSHOTS_DIR
           npx playwright test || echo "Playwright test failed" >> $GITHUB_ENV
 
       # Handling success case for any branch
