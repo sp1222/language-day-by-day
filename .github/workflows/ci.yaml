@@ -120,13 +120,19 @@ jobs:
       - name: Handle main branch failure
         if: failure() && github.ref == 'refs/heads/main'
         run: |
-          for file in __test__/visual/images/*-current.png; do
-            mv "$file" "${file/-current.png/-baseline.png}"
+          for file in __test__/visual/screenshots/*-current.png; do
+            echo $file
+            if [ -e "$file" ]; then
+              mv "$file" "${file/-current.png/-baseline.png}"
+            else
+              echo "No current screenshot found to move."
+              exit 0
+            fi
           done
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add __test__/visual/images/*-baseline.png
-          git commit -m "Update Playwright baseline images [ci skip]"
+          git add __test__/visual/screenshots/*-baseline.png
+          git commit -m "Update Playwright baseline screenshots [ci skip]"
           git push
 
 
