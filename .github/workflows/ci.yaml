@@ -80,8 +80,6 @@ jobs:
         run: npx wait-on http://localhost:6006
       - name: Run visual regression test
         run: |
-          SCREENSHOTS_DIR="$GITHUB_WORKSPACE/__test__/visual/screenshots"
-          echo $SCREENSHOTS_DIR
           npx playwright test || echo "Playwright test failed" >> $GITHUB_ENV
 
       # Handling success case for any branch
@@ -89,6 +87,7 @@ jobs:
       - name: Handle success
         if: success()
         run: |
+          SCREENSHOTS_DIR="$GITHUB_WORKSPACE/__test__/visual/screenshots"
           for file in $SCREENSHOTS_DIR/*-current.png; do
             mv "$file" "${file/-current.png/-baseline.png}"
           done
@@ -103,6 +102,7 @@ jobs:
       - name: Handle feature branch failure
         if: failure() && github.ref != 'refs/heads/main'
         run: |
+          SCREENSHOTS_DIR="$GITHUB_WORKSPACE/__test__/visual/screenshots"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add $SCREENSHOTS_DIR/*.png
@@ -122,6 +122,7 @@ jobs:
       - name: Handle main branch failure
         if: failure() && github.ref == 'refs/heads/main'
         run: |
+          SCREENSHOTS_DIR="$GITHUB_WORKSPACE/__test__/visual/screenshots"
           for file in $SCREENSHOTS_DIR/*-current.png; do
             echo $file
             if [ -e "$file" ]; then
