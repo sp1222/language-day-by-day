@@ -1,4 +1,4 @@
-import { copyFileSync, existsSync, readFileSync, writeFileSync } from "fs";
+import { existsSync, readFileSync, writeFileSync } from "fs";
 import { PNG } from "pngjs";
 
 const pixelmatchPromise = import("pixelmatch");
@@ -26,8 +26,7 @@ export const compareImages = async (baselinePath: string, currentPath: string, d
   return numDiffPixels;
 }
 
-export const isRunningRegressionTest = async (baselinePath: string, currentPath: string) => {
-
+export const isRunningRegressionTest = async (baselinePath: string) => {
   if (!existsSync(baselinePath)) {
     return false;
   }
