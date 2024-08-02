@@ -12,6 +12,7 @@ test("Header visual regression test", async ({ page }) => {
 
   await page.screenshot({ path: currentPath });
   if (await isRunningRegressionTest(baselinePath)) {
+    // Is there a better way to do this?
     const numDiffPixels = await compareImages(baselinePath, currentPath, diffPath);
     expect(numDiffPixels).toBe(0);
   }
