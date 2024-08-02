@@ -5,6 +5,7 @@ on:
     branch: [ "**" ]
 
 jobs:
+  # may not need this
   check-commit:
     runs-on: ubuntu-latest
     steps:
@@ -84,7 +85,9 @@ jobs:
 
       # Handling success case for any branch
       # We are accepting the current generated image as the new baseline image for future comparisons
-      - name: Handle success
+      # Or there are no changes to the image and no commit needs to be made
+      # NOTE: may need to delete current and diff pngs
+      - name: Handle passing tests
         if: success()
         run: |
           SCREENSHOTS_DIR="$GITHUB_WORKSPACE/__test__/visual/screenshots"
@@ -101,17 +104,19 @@ jobs:
             git push
           fi
 
-      # Handling failure case for feature branches
+      # Handling test failure on feature branches
       # We persist all three images for the branch owner to review
-      - name: Handle feature branch failure
+      - name: Handle feature branch test failure
         if: failure() && github.ref != 'refs/heads/main'
         run: |
           SCREENSHOTS_DIR="$GITHUB_WORKSPACE/__test__/visual/screenshots"
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add $SCREENSHOTS_DIR/*.png
-          git commit -m "Add Playwright test artifacts [ci skip]"
+          git commit -m "Add failing test images [ci skip]"
           git push
+
+      # Handles leaving a comment on the PR to notify branch owner that there is a visual change blocking the PR
       - name: Comment on PR
         if: failure() && github.ref != 'refs/heads/main'
         uses: peter-evans/create-or-update-comment@v4
@@ -122,24 +127,20 @@ jobs:
           # body: "Visual regression test failed. Check the screenshots [here](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})."
           body: "Visual regression test failed. Check the screenshots."
 
-      # Handling failure case for the main branch
-      - name: Handle main branch failure
+      # Handling test failure on the main branch
+      # If this test fails in main, then we are accepting the visual difference recognized in the failed test and making the generated current image the new baseline image
+      # NOTE: may need to delete current and diff pngs
+      - name: Handle main branch test failure
         if: failure() && github.ref == 'refs/heads/main'
         run: |
           SCREENSHOTS_DIR="$GITHUB_WORKSPACE/__test__/visual/screenshots"
           for file in $SCREENSHOTS_DIR/*-current.png; do
-            echo $file
-            if [ -e "$file" ]; then
-              mv "$file" "${file/-current.png/-baseline.png}"
-            else
-              echo "No current screenshot found to move."
-              exit 0
-            fi
+            mv "$file" "${file/-current.png/-baseline.png}"
           done
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add $SCREENSHOTS_DIR/*-baseline.png
-          git commit -m "Update Playwright baseline screenshots [ci skip]"
+          git commit -m "Update baseline screenshots [ci skip]"
           git push
 
   build:
