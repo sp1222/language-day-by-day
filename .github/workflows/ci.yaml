@@ -122,7 +122,7 @@ jobs:
 
       # Handles leaving a comment on the PR to notify branch owner that there is a visual change blocking the PR
       - name: Comment on PR
-        if: failure() && github.ref != 'refs/heads/main' github.event_name == 'pull_request'
+        if: failure() && github.ref != 'refs/heads/main' && github.event_name == 'pull_request'
         uses: peter-evans/create-or-update-comment@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
