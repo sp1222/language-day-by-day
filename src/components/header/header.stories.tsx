@@ -6,7 +6,7 @@ import { Header } from "@/components/header/header";
 const meta: Meta<typeof Header> = {
   component: Header,
   args: {
-    text: "Language Day-by-Day",
+    text: "Header Text",
   },
 };
 
@@ -16,7 +16,7 @@ type Story = StoryObj<typeof Header>;
 export const Primary: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    const headerText = canvas.getByText(/Language Day-by-Day/);
+    const headerText = canvas.getByText(/Header Text/);
     await expect(headerText).toBeInTheDocument();
   },
 };

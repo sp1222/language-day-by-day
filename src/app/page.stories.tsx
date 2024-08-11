@@ -8,4 +8,4 @@ const meta: Meta<typeof Home> = {
 export default meta;
 type Story = StoryObj<typeof Home>;
 
-export const Primary: Story = {};
+export const InitialState: Story = {};
