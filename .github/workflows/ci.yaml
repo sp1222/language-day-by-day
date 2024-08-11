@@ -2,7 +2,8 @@ name: CI Workflow
 
 on: 
   push:
-    branch: "**" 
+    branch: 
+      - "**" 
   pull_request:
     branches:
       - "**"
