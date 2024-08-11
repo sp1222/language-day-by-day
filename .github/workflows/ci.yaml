@@ -65,6 +65,7 @@ jobs:
   test-visual:
     needs: check-commit
     runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
     steps:
       - uses: actions/checkout@v4
       - name: Use Node.js 20
